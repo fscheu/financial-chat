@@ -2,7 +2,6 @@ from datetime import datetime, timedelta
 
 from langchain.agents import tool
 from openbb import obb
-from pandas_datareader import data as pdr
 
 from app.features.technical import add_technicals
 from app.features.screener import fetch_custom_universe
@@ -12,8 +11,6 @@ from app.tools.types import StockStatsInput
 import quantstats as qs
 import pandas as pd
 import yfinance as yf
-
-yf.pdr_override()
 
 
 def fetch_and_convert_ohlc(symbol: str, start_date: str) -> pd.DataFrame:
@@ -28,11 +25,11 @@ def fetch_and_convert_ohlc(symbol: str, start_date: str) -> pd.DataFrame:
         pd.DataFrame: DataFrame with OHLC columns in lower case.
     """
     try:
-        df = pdr.get_data_yahoo(symbol, start=start_date)
+        df = yf.download(symbol, start=start_date, multi_level_index=False)
         df.index = pd.to_datetime(df.index)
 
         df.columns = [col.lower() for col in df.columns]
-        df["close"] = df["adj close"]
+        # df["close"] = df["adj close"]
 
         return df
     except Exception as e:

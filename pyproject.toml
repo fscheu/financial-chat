@@ -4,6 +4,7 @@ version = "0.1.0"
 description = "The Trading Dude Abides"
 authors = ["Seth Hobson <seth@major7apps.com>"]
 readme = "README.md"
+package-mode = false
 
 [tool.poetry.dependencies]
 python = ">=3.10,<3.12"
@@ -34,7 +35,6 @@ langsmith = "^0.1.63"
 langgraph = "^0.0.55"
 openbb-oecd = "1.1.1"
 langchain-community = "^0.2.1"
-pandas-datareader = "^0.10.0"
 boto3 = "^1.34.120"
 langchain-aws = "^0.1.6"
 langchain-experimental = "^0.0.60"
